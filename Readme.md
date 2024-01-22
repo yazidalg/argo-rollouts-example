@@ -20,5 +20,7 @@ bash```docker tag <your-image-name>:<image-tag> <username>/<your-image-name>:<im
 4. Push your docker image to dockerhub.
 bash```docker push <username>/<your-image-name>:<image-tag>```
 
+5. See your deployment strategy.
+bash```kubectl argo rollouts dashboard``` or bash```kubectl argo rollouts get rollout <your-deployment> --watch```
 
 Actually you can use another provider for deploy your image or container, but i prefer using dockerhub for testing locally.

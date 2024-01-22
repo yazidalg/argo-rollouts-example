@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: example
-        image: 211104/argo-rollouts:v0.0.3
+        image: 211104/argo-rollouts:v0.0.4
         imagePullPolicy: Always
         ports:
         - containerPort: 80
