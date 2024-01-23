@@ -6,7 +6,7 @@ rollout:
     ports: 80
     image:
       repository: 211104/argo-rollouts
-      tag: v0.0.1
+      tag: v0.0.2
 
 service:
   namespace: example
