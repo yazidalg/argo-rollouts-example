@@ -1,6 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
-{{- with .Values.deployment}}
+{{- with .Values.rollout}}
 metadata:
   namespace: {{ default "default" .namespace}}
   name: {{ $.Release.Name }}-deployment

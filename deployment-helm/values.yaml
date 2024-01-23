@@ -1,4 +1,4 @@
-deployment:
+rollout:
   namespace: example
   replicaCount: 1
   revisionHistory: 2
