@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+{{- with .Values.deployment}}
+metadata:
+  namespace: {{ default "default" .namespace}}
+  name: {{ $.Release.Name }}-deployment
+  labels:
+    app: {{ $.Release.Name }}
+spec:
+  replicas: {{ .replicaCount }}
+  revisionHistoryLimit: {{ .revisionHistory }}
+  selector:
+    matchLabels:
+      app: {{ $.Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $.Release.Name }}
+    spec:
+      containers:
+      - name: {{ $.Release.Name }}
+        image: {{ .containers.image.repository }}:{{ default "latest" .containers.image.tag }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .containers.ports }}
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      # The following pause step will pause the rollout indefinitely until manually resumed.
+      # Rollouts can be manually resumed by running `kubectl argo rollouts promote ROLLOUT`
+      - pause: {duration: 10s}
+      - setWeight: 40
+      - pause: {duration: 40s}
+      - setWeight: 60
+      - pause: {duration: 20s}
+      - setWeight: 80
+      - pause: {duration: 20s}
+{{- end}}
