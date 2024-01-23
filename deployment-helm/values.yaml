@@ -9,5 +9,6 @@ deployment:
       tag: v0.0.1
 
 service:
+  namespace: example
   type: ClusterIP
   port: 80
